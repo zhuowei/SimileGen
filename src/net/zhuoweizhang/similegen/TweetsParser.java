@@ -18,10 +18,8 @@ public class TweetsParser {
 		//for each CSV:
 		//read first line
 		//put first line indices into list
-		int i = 0;
 		for (File f: sourceDir.listFiles()) {
 			parseOneJson(f);
-			if (i++ > 3) break;
 		}
 		return this;
 	}

@@ -1,10 +1,13 @@
 package net.zhuoweizhang.similegen;
+import java.io.*;
 import java.util.*;
 
 import org.linkgrammar.*;
 public class ComparisonExtractor {
 
-	public static void extract(List<String> strings) {
+	public static void extract(List<String> strings) throws IOException {
+		File output = new File("output.txt");
+		PrintWriter outfile = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(output))), true);
 		//use Link grammar
 		LinkGrammar.init();
 		LinkGrammar.makeLinkage(0); // need to call at least once, otherwise it crashes
@@ -30,7 +33,7 @@ public class ComparisonExtractor {
 					if (leftWordStr.contains("[?]") || rightWordStr.contains("[?]")) {
 						continue;
 					}
-					System.out.println(leftWordStr + "," + rightWordStr);
+					outfile.println(leftWordStr + "," + rightWordStr);
 				}
 				
 			}
@@ -38,6 +41,7 @@ public class ComparisonExtractor {
 			ia++;
 		}
 		long endAllTime = System.currentTimeMillis();
-		System.out.println("Ran through " + ia + " sentences in " + (endAllTime - beginAllTime) + "milliseconds");
+		System.out.println("Ran through " + ia + " tweets in " + (endAllTime - beginAllTime) + " milliseconds");
+		outfile.close();
 	}
 }
