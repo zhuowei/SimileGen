@@ -7,7 +7,7 @@ public class SimileGen {
 		try {
 			File myDict = new File(args[0]);
 			List<String> strings = new TweetsParser(myDict).readAll().strings();
-			System.out.println(strings);
+			ComparisonExtractor.extract(strings);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
